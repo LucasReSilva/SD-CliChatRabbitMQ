@@ -5,10 +5,15 @@
  */
 package io.github.lucasresilva.clichatrabbitmq;
 
+import java.nio.charset.Charset;
+
 /**
  *
  * @author lucas
  */
 public class Configuration {
+    
+    public static final String SERVER, USER = "cspimzij", PASSWORD, URL;
+    public static final Charset CHARSET;
     
 }
