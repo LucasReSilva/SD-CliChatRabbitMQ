@@ -18,7 +18,7 @@ import java.io.IOException;
  *
  * @author lucas
  */
-public class Receiver {
+public class Receiver implements Runnable{
 
     private final static String QUEUE_NAME = "hello";
 
@@ -40,6 +40,11 @@ public class Receiver {
             }
         };
         channel.basicConsume(QUEUE_NAME, true, consumer);
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -24,18 +24,44 @@ public class ServerConnection {
     static Channel CHANNEL;
 
     public ServerConnection() throws IOException, TimeoutException {
+
         // Inicializando FACTORY
         ServerConnection.FACTORY = new ConnectionFactory();
 
         // Stenado propriedades da FACTORY
-        ServerConnection.FACTORY.setUsername("userName");
-        ServerConnection.FACTORY.setPassword("password");
-        ServerConnection.FACTORY.setVirtualHost("virtualHost");
-        ServerConnection.FACTORY.setHost("hostName");
+        ServerConnection.FACTORY.setUsername("cspimzij");
+        ServerConnection.FACTORY.setPassword("lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_");
+        ServerConnection.FACTORY.setVirtualHost("cspimzij");
+        ServerConnection.FACTORY.setHost("salamander.rmq.cloudamqp.com");
         ServerConnection.FACTORY.setPort(5672);
 
         ServerConnection.CONN = ServerConnection.FACTORY.newConnection();
         ServerConnection.CHANNEL = ServerConnection.CONN.createChannel();
+    }
+
+    public void createUserQueue(String userName) throws IOException {
+        ServerConnection.CHANNEL.queueDeclare(userName, false, false, false, null);
+    }
+
+    public void crateGroup(String userName, String groupName) throws IOException {
+        CHANNEL.exchangeDeclare(groupName, "fanout");
+        CHANNEL.queueBind(userName, groupName, "");
+        System.out.println(userName.toUpperCase() + " criou o grupo " + groupName.toUpperCase() );
+    }
+    
+    public void deleteGroup(String groupName) throws IOException {
+        CHANNEL.exchangeDelete(groupName);
+        System.out.println("Grupo " + groupName.toUpperCase() + " foi detelado" );
+    }
+    
+    public void addUserToGroup(String userName, String groupName) throws IOException {
+        CHANNEL.queueBind(userName, groupName, "");
+        System.out.println(userName.toUpperCase() + " foi adicionado ao grupo " + groupName.toUpperCase() );
+    }
+    
+    public void removeUserFromGroup(String userName, String groupName) throws IOException {
+        CHANNEL.queueUnbind(userName, groupName, "");
+        System.out.println(userName.toUpperCase() + " foi removido do grupo " + groupName.toUpperCase() );
     }
 
 }
