@@ -6,8 +6,11 @@
 package io.github.lucasresilva.clichatrabbitmq;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.GregorianCalendar;
+import org.json.JSONObject;
 
 /**
  *
@@ -15,21 +18,39 @@ import com.rabbitmq.client.ConnectionFactory;
  */
 public class Sender {
 
-    private final static String QUEUE_NAME = "hello";
+    private static JSONObject jsonObj = new JSONObject();
 
-    public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+    private static GregorianCalendar calendar = new GregorianCalendar();
+    private static int day, month, year, hour, minute;
+    private static String date, hours;
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        String message = "Hello World!";
-        channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
-        System.out.println(" [x] Sent '" + message + "'");
+    private static String formatMsg(String message, String user, String group) {
 
-        channel.close();
-        connection.close();
+        day = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+        month = calendar.get(GregorianCalendar.MONTH);
+        year = calendar.get(GregorianCalendar.YEAR);
+        hour = calendar.get(GregorianCalendar.HOUR_OF_DAY);
+        minute = calendar.get(GregorianCalendar.MINUTE);
+
+        date = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
+        hours = Integer.toString(hour) + ":" + Integer.toString(minute);
+
+        jsonObj.put("sender", group + user);
+        jsonObj.put("date", date);
+        jsonObj.put("hora", hours);
+        jsonObj.put("content", message);
+
+        return jsonObj.toString();
+    }
+
+    public static void sendToUser(Channel channel, String queue, String message) throws UnsupportedEncodingException, IOException {
+        String msg = formatMsg(message, queue, "");
+        channel.basicPublish("", queue, null, msg.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static void sendToGroup(Channel channel, String user, String group, String message) throws UnsupportedEncodingException, IOException {
+        String msg = formatMsg(message, user, group + "/");
+        channel.basicPublish(group, "", null, msg.getBytes(StandardCharsets.UTF_8));
     }
 
 }

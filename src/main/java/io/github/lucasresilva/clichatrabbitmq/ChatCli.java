@@ -35,20 +35,25 @@ public class ChatCli {
 
         // Armazena nome do usuario
         String destinatario = "";
+        
+        // Recebendo msg
+        Receiver receiver = new Receiver(sc.getChannel(), user, destinatario, statusDestinatario);
+        Thread receiving = new Thread(receiver);
+        receiving.start();
 
         do {
             // Pega proxima entrada de texto
-            switch(statusDestinatario){
+            switch (statusDestinatario) {
                 case 'G':
                     System.out.print(destinatario + " (grupo)>> ");
                     break;
-                    
+
                 case 'P':
-                        System.out.print(destinatario + ">> ");
-                        break;
-                 default:
-                     System.out.print(">> ");
-                
+                    System.out.print(destinatario + ">> ");
+                    break;
+                default:
+                    System.out.print(">> ");
+
             }
             message = input.nextLine();
 
@@ -94,16 +99,24 @@ public class ChatCli {
 
                         // Verifica se destinatario é usuario ou grupo
                         if (message.length() > 3 && "@@".equals(message.substring(0, 2))) {
-                            
+
                             statusDestinatario = 'G';
                             destinatario = message.substring(2, message.length());
-                            
+                            sc.queueDeclare(destinatario);
+
                         } else {
                             statusDestinatario = 'P';
                             destinatario = message.substring(1, message.length());
+                            sc.queueDeclare(destinatario);
                         }
 
                     } else if (statusDestinatario != 'I') {
+
+                        if (statusDestinatario == 'P') {
+                            Sender.sendToUser(sc.getChannel(), destinatario, message);
+                        } else {
+                            Sender.sendToGroup(sc.getChannel(),user, destinatario, message);
+                        }
 
                     } else {
                         statusDestinatario = 'I';
@@ -117,6 +130,7 @@ public class ChatCli {
         } while (!message.equals("!exit"));
 
         System.out.println("Hasta la vista, baby");
+        sc.close();
 
     }
 

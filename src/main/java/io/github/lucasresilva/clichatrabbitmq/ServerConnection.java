@@ -21,7 +21,7 @@ public class ServerConnection {
 
     static Connection CONN;
 
-    static Channel CHANNEL;
+    public static Channel CHANNEL;
 
     public ServerConnection() throws IOException, TimeoutException {
 
@@ -37,6 +37,14 @@ public class ServerConnection {
 
         ServerConnection.CONN = ServerConnection.FACTORY.newConnection();
         ServerConnection.CHANNEL = ServerConnection.CONN.createChannel();
+    }
+    
+    public Channel getChannel(){
+        return CHANNEL;
+    }
+    
+    public void queueDeclare(String queueName) throws IOException{
+        CHANNEL.queueDeclare(queueName, false, false, false, null);
     }
 
     public void createUserQueue(String userName) throws IOException {
@@ -62,6 +70,11 @@ public class ServerConnection {
     public void removeUserFromGroup(String userName, String groupName) throws IOException {
         CHANNEL.queueUnbind(userName, groupName, "");
         System.out.println(userName.toUpperCase() + " foi removido do grupo " + groupName.toUpperCase() );
+    }
+    
+    public void close() throws IOException, TimeoutException{
+         CHANNEL.close();
+        CONN.close();
     }
 
 }
