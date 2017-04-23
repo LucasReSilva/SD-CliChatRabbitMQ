@@ -45,25 +45,40 @@ public class Receiver implements Runnable {
                 String message = new String(body, StandardCharsets.UTF_8);
 
                 JSONObject my_obj = new JSONObject(message);
-                if (!ChatCli.ANTERIOR.equals(">> ")) { 
-                    System.out.println();
-                }
-                System.out.println("(" + my_obj.getString("date") + " รกs " + my_obj.get("hora") + ") " + my_obj.get("sender") + " diz: " + my_obj.get("content"));
-                if (!ChatCli.ANTERIOR.equals(">> ")) {
-                    System.out.print(ChatCli.ANTERIOR + ">> ");
-                }
-                /* switch (statusDestinatario) {
-                    case 'G':
-                        System.out.print(destinatario + " (grupo)>> ");
-                        break;
 
-                    case 'P':
-                        System.out.print(destinatario + ">> ");
-                        break;
-                    default:
-                        System.out.print(">> ");
+                boolean show = true;
 
-                } */
+                switch (my_obj.get("sender").toString().split("/").length) {
+                    case 1:
+                        if (my_obj.get("sender").toString().split("/")[0].equals(queueName)) {
+
+                            show = false;
+
+                        }
+                        break;
+                    case 2:
+                        if (my_obj.get("sender").toString().split("/")[1].equals(queueName)) {
+
+                            show = false;
+
+                        }
+                        break;
+                }
+
+                if (show) {
+
+                    if (!ChatCli.ANTERIOR.equals(">> ")) {
+                        System.out.println();
+                    }
+
+                    System.out.println("(" + my_obj.getString("date") + " ás " + my_obj.get("hora") + ") " + my_obj.get("sender") + " diz: " + my_obj.get("content"));
+
+                    if (!ChatCli.ANTERIOR.equals(">> ")) {
+                        System.out.print(ChatCli.ANTERIOR + ">> ");
+                    }
+                    
+                }
+
             }
         };
         try {
