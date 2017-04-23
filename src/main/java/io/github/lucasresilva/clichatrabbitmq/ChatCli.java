@@ -113,7 +113,7 @@ public class ChatCli {
                     } else if (statusDestinatario != 'I') {
 
                         if (statusDestinatario == 'P') {
-                            Sender.sendToUser(sc.getChannel(), destinatario, message);
+                            Sender.sendToUser(sc.getChannel(), user, destinatario, message);
                         } else {
                             Sender.sendToGroup(sc.getChannel(),user, destinatario, message);
                         }

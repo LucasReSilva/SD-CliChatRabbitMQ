@@ -43,13 +43,13 @@ public class Sender {
         return jsonObj.toString();
     }
 
-    public static void sendToUser(Channel channel, String queue, String message) throws UnsupportedEncodingException, IOException {
-        String msg = formatMsg(message, queue, "");
-        channel.basicPublish("", queue, null, msg.getBytes(StandardCharsets.UTF_8));
+    public static void sendToUser(Channel channel,String sender, String destination, String message) throws UnsupportedEncodingException, IOException {
+        String msg = formatMsg(message, sender, "");
+        channel.basicPublish("", destination, null, msg.getBytes(StandardCharsets.UTF_8));
     }
 
-    public static void sendToGroup(Channel channel, String user, String group, String message) throws UnsupportedEncodingException, IOException {
-        String msg = formatMsg(message, user, group + "/");
+    public static void sendToGroup(Channel channel, String sender, String group, String message) throws UnsupportedEncodingException, IOException {
+        String msg = formatMsg(message, sender, group + "/");
         channel.basicPublish(group, "", null, msg.getBytes(StandardCharsets.UTF_8));
     }
 

@@ -45,9 +45,9 @@ public class Receiver implements Runnable {
 
                 JSONObject my_obj = new JSONObject(message);
                 System.out.println();
-                System.out.println("(" + my_obj.getString("date") + " ás " + my_obj.get("hora") + " ) " + my_obj.get("sender") + " diz:" + my_obj.get("content"));
+                System.out.print("(" + my_obj.getString("date") + " ás " + my_obj.get("hora") + ") " + my_obj.get("sender") + " diz: " + my_obj.get("content"));
 
-                switch (statusDestinatario) {
+                /* switch (statusDestinatario) {
                     case 'G':
                         System.out.print(destinatario + " (grupo)>> ");
                         break;
@@ -58,7 +58,7 @@ public class Receiver implements Runnable {
                     default:
                         System.out.print(">> ");
 
-                }
+                } */
             }
         };
         try {
