@@ -53,7 +53,7 @@ public class ServerConnection {
         ServerConnection.CHANNEL.queueDeclare(userName, false, false, false, null);
     }
 
-    public void crateGroup(String userName, String groupName) throws IOException {
+    public void createGroup(String userName, String groupName) throws IOException {
         CHANNEL.exchangeDeclare(groupName, "fanout");
         CHANNEL.queueBind(userName, groupName, "");
         System.out.println(userName.toUpperCase() + " criou o grupo " + groupName.toUpperCase());

@@ -69,7 +69,7 @@ public class ChatCli {
                 // Criar um grupo
                 case "!addGroup":
 
-                    sc.crateGroup(user, message.split(" ")[1]);
+                    sc.createGroup(user, message.split(" ")[1]);
                     break;
 
                 // Deletar grupo
