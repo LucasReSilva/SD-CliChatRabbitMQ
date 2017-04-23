@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class ChatCli {
 
-    static public void main(String args[]) throws IOException, TimeoutException {
+    static public void main(String args[]) throws IOException, TimeoutException, InterruptedException {
 
         // Instancia conexão
         ServerConnection sc = new ServerConnection();
@@ -40,6 +40,8 @@ public class ChatCli {
         Receiver receiver = new Receiver(sc.getChannel(), user, destinatario, statusDestinatario);
         Thread receiving = new Thread(receiver);
         receiving.start();
+        
+        Thread.sleep(250);
 
         do {
             // Pega proxima entrada de texto
