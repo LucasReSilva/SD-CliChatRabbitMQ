@@ -11,6 +11,7 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ public class Receiver implements Runnable {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
 
-                String message = new String(body, "UTF-8");
+                String message = new String(body, StandardCharsets.UTF_8);
 
                 JSONObject my_obj = new JSONObject(message);
                 System.out.println();

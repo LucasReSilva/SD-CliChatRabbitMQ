@@ -35,7 +35,7 @@ public class ChatCli {
 
         // Armazena nome do usuario
         String destinatario = "";
-        
+
         // Recebendo msg
         Receiver receiver = new Receiver(sc.getChannel(), user, destinatario, statusDestinatario);
         Thread receiving = new Thread(receiver);
@@ -115,7 +115,7 @@ public class ChatCli {
                         if (statusDestinatario == 'P') {
                             Sender.sendToUser(sc.getChannel(), user, destinatario, message);
                         } else {
-                            Sender.sendToGroup(sc.getChannel(),user, destinatario, message);
+                            Sender.sendToGroup(sc.getChannel(), user, destinatario, message);
                         }
 
                     } else {

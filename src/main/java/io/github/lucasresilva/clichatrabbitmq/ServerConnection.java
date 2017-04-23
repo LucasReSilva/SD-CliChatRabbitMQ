@@ -35,15 +35,16 @@ public class ServerConnection {
         ServerConnection.FACTORY.setHost("salamander.rmq.cloudamqp.com");
         ServerConnection.FACTORY.setPort(5672);
 
+        // Inicializa a Conexao e o Canal
         ServerConnection.CONN = ServerConnection.FACTORY.newConnection();
         ServerConnection.CHANNEL = ServerConnection.CONN.createChannel();
     }
-    
-    public Channel getChannel(){
+
+    public Channel getChannel() {
         return CHANNEL;
     }
-    
-    public void queueDeclare(String queueName) throws IOException{
+
+    public void queueDeclare(String queueName) throws IOException {
         CHANNEL.queueDeclare(queueName, false, false, false, null);
     }
 
@@ -54,26 +55,26 @@ public class ServerConnection {
     public void crateGroup(String userName, String groupName) throws IOException {
         CHANNEL.exchangeDeclare(groupName, "fanout");
         CHANNEL.queueBind(userName, groupName, "");
-        System.out.println(userName.toUpperCase() + " criou o grupo " + groupName.toUpperCase() );
+        System.out.println(userName.toUpperCase() + " criou o grupo " + groupName.toUpperCase());
     }
-    
+
     public void deleteGroup(String groupName) throws IOException {
         CHANNEL.exchangeDelete(groupName);
-        System.out.println("Grupo " + groupName.toUpperCase() + " foi detelado" );
+        System.out.println("Grupo " + groupName.toUpperCase() + " foi detelado");
     }
-    
+
     public void addUserToGroup(String userName, String groupName) throws IOException {
         CHANNEL.queueBind(userName, groupName, "");
-        System.out.println(userName.toUpperCase() + " foi adicionado ao grupo " + groupName.toUpperCase() );
+        System.out.println(userName.toUpperCase() + " foi adicionado ao grupo " + groupName.toUpperCase());
     }
-    
+
     public void removeUserFromGroup(String userName, String groupName) throws IOException {
         CHANNEL.queueUnbind(userName, groupName, "");
-        System.out.println(userName.toUpperCase() + " foi removido do grupo " + groupName.toUpperCase() );
+        System.out.println(userName.toUpperCase() + " foi removido do grupo " + groupName.toUpperCase());
     }
-    
-    public void close() throws IOException, TimeoutException{
-         CHANNEL.close();
+
+    public void close() throws IOException, TimeoutException {
+        CHANNEL.close();
         CONN.close();
     }
 
