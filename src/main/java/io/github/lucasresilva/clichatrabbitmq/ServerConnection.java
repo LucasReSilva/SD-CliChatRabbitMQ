@@ -5,6 +5,7 @@
  */
 package io.github.lucasresilva.clichatrabbitmq;
 
+import com.rabbitmq.client.Address;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -34,9 +35,9 @@ public class ServerConnection {
         ServerConnection.FACTORY.setVirtualHost("admin");
         ServerConnection.FACTORY.setHost("34.210.62.22");
         ServerConnection.FACTORY.setPort(5672);
-
+      
         // Inicializa a Conexao e o Canal
-        ServerConnection.CONN = ServerConnection.FACTORY.newConnection();
+        ServerConnection.CONN = ServerConnection.FACTORY.newConnection(ServerManager.getServersAddress());
         ServerConnection.CHANNEL = ServerConnection.CONN.createChannel();
     }
 
