@@ -45,9 +45,13 @@ public class Receiver implements Runnable {
                 String message = new String(body, StandardCharsets.UTF_8);
 
                 JSONObject my_obj = new JSONObject(message);
-                System.out.println();
-                System.out.print("(" + my_obj.getString("date") + " ás " + my_obj.get("hora") + ") " + my_obj.get("sender") + " diz: " + my_obj.get("content"));
-
+                if(!ChatCli.ULTIMO.equals(">> ")){ //@gilli
+                    System.out.println();
+                }
+                System.out.println("(" + my_obj.getString("date") + " รกs " + my_obj.get("hora") + ") " + my_obj.get("sender") + " diz: " + my_obj.get("content"));
+                if(!ChatCli.ULTIMO.equals(">> ")){
+                    System.out.print(ChatCli.ULTIMO + ">> "); //@gilli
+                }
                 /* switch (statusDestinatario) {
                     case 'G':
                         System.out.print(destinatario + " (grupo)>> ");

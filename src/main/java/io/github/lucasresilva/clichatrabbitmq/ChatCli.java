@@ -15,6 +15,8 @@ import java.util.concurrent.TimeoutException;
  */
 public class ChatCli {
 
+    public static String ULTIMO = ">> "; //@gilli exibir destino depois de receber mensagem
+    
     static public void main(String args[]) throws IOException, TimeoutException, InterruptedException {
 
         // Instancia conexão
@@ -29,7 +31,7 @@ public class ChatCli {
         sc.createUserQueue(user);
 
         String message;
-
+        
         // Seta o status do destinatario I(invalido) G(Grupo) P(Privado)
         char statusDestinatario = 'I';
 
@@ -40,9 +42,9 @@ public class ChatCli {
         Receiver receiver = new Receiver(sc.getChannel(), user, destinatario, statusDestinatario);
         Thread receiving = new Thread(receiver);
         receiving.start();
-        
-        Thread.sleep(250);
 
+        Thread.sleep(250); //@gilli pra quando abrir o chat e ja tiver mensagem na fila ele espera pra imprimir >>
+        
         do {
             // Pega proxima entrada de texto
             switch (statusDestinatario) {
@@ -54,7 +56,9 @@ public class ChatCli {
                     System.out.print(destinatario + ">> ");
                     break;
                 default:
-                    System.out.print(">> ");
+                    if(ULTIMO.equals(">> ")){ //@gilli
+                        System.out.print(">> ");
+                    }
 
             }
             message = input.nextLine();
@@ -105,11 +109,12 @@ public class ChatCli {
                             statusDestinatario = 'G';
                             destinatario = message.substring(2, message.length());
                             sc.queueDeclare(destinatario);
-
+                            ULTIMO = destinatario; //@gilli
                         } else {
                             statusDestinatario = 'P';
                             destinatario = message.substring(1, message.length());
                             sc.queueDeclare(destinatario);
+                            ULTIMO = destinatario; //@gilli
                         }
 
                     } else if (statusDestinatario != 'I') {
