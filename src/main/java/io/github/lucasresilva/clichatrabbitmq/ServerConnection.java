@@ -29,10 +29,10 @@ public class ServerConnection {
         ServerConnection.FACTORY = new ConnectionFactory();
 
         // Stenado propriedades da FACTORY
-        ServerConnection.FACTORY.setUsername("cspimzij");
-        ServerConnection.FACTORY.setPassword("lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_");
-        ServerConnection.FACTORY.setVirtualHost("cspimzij");
-        ServerConnection.FACTORY.setHost("salamander.rmq.cloudamqp.com");
+        ServerConnection.FACTORY.setUsername("admin");
+        ServerConnection.FACTORY.setPassword("admin");
+        ServerConnection.FACTORY.setVirtualHost("admin");
+        ServerConnection.FACTORY.setHost("34.210.62.22");
         ServerConnection.FACTORY.setPort(5672);
 
         // Inicializa a Conexao e o Canal

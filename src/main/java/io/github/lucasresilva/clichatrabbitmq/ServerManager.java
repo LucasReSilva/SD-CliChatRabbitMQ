@@ -18,26 +18,7 @@ public class ServerManager {
     private static final ArrayList<Server> SERVERLIST = new ArrayList<Server>();
 
     public ServerManager() {
-        // Lucas's Servers
-        ServerManager.SERVERLIST.add(
-                new Server("salamander.rmq.cloudamqp.com",
-                        "cspimzij",
-                        "lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_",
-                        "amqp://cspimzij:lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_@salamander.rmq.cloudamqp.com/cspimzij",
-                        5672,
-                        StandardCharsets.UTF_8)
-        );
-
-        // Keomas's Servers
-        ServerManager.SERVERLIST.add(
-                new Server("salamander.rmq.cloudamqp.com",
-                        "cspimzij",
-                        "lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_",
-                        "amqp://cspimzij:lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_@salamander.rmq.cloudamqp.com/cspimzij",
-                        5672,
-                        StandardCharsets.UTF_8)
-        );
-
+        
         // Dimitri's Servers
         ServerManager.SERVERLIST.add(
                 new Server("salamander.rmq.cloudamqp.com",
