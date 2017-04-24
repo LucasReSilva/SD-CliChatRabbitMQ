@@ -33,7 +33,7 @@ public class ServerConnection {
         ServerConnection.FACTORY.setUsername("admin");
         ServerConnection.FACTORY.setPassword("admin");
         ServerConnection.FACTORY.setVirtualHost("admin");
-        ServerConnection.FACTORY.setHost("34.210.62.22");
+        ServerConnection.FACTORY.setHost("35.161.72.204");
         ServerConnection.FACTORY.setPort(5672);
       
         // Inicializa a Conexao e o Canal

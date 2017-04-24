@@ -21,7 +21,7 @@ public class ServerManager {
 
         // Dimitri's Servers
         ServerManager.SERVERLIST.add(
-                new Server("34.210.62.22",
+                new Server("35.161.72.204",
                         "admin",
                         "admin",
                         "amqp://cspimzij:lRoXHJYwBXo0ImeBAUQr27Smdbti-TG_@salamander.rmq.cloudamqp.com/cspimzij",
