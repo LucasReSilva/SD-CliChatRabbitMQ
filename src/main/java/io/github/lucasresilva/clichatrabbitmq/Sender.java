@@ -14,7 +14,12 @@ import org.json.JSONObject;
 
 /**
  *
- * @author lucas
+ * @authors
+ * Dimitri Carvalho Menezes
+ * Gilliard De Jesus Santo
+ * Keomas Silva Santos
+ * Lucas Renato Aragão Silva
+ * 
  */
 public class Sender {
 
@@ -43,7 +48,7 @@ public class Sender {
         return jsonObj.toString();
     }
 
-    public static void sendToUser(Channel channel,String sender, String destination, String message) throws UnsupportedEncodingException, IOException {
+    public static void sendToUser(Channel channel, String sender, String destination, String message) throws UnsupportedEncodingException, IOException {
         String msg = formatMsg(message, sender, "");
         channel.basicPublish("", destination, null, msg.getBytes(StandardCharsets.UTF_8));
     }

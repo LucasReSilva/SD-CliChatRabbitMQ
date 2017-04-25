@@ -18,7 +18,12 @@ import org.json.JSONObject;
 
 /**
  *
- * @author lucas
+ * @authors
+ * Dimitri Carvalho Menezes
+ * Gilliard De Jesus Santo
+ * Keomas Silva Santos
+ * Lucas Renato Aragão Silva
+ * 
  */
 public class Receiver implements Runnable {
 
@@ -76,7 +81,7 @@ public class Receiver implements Runnable {
                     if (!ChatCli.ANTERIOR.equals(">> ")) {
                         System.out.print(ChatCli.ANTERIOR + ">> ");
                     }
-                    
+
                 }
 
             }

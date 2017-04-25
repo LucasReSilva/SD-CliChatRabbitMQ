@@ -5,7 +5,6 @@
  */
 package io.github.lucasresilva.clichatrabbitmq;
 
-import com.rabbitmq.client.Address;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -14,7 +13,12 @@ import java.util.concurrent.TimeoutException;
 
 /**
  *
- * @author lucas
+ * @authors
+ * Dimitri Carvalho Menezes
+ * Gilliard De Jesus Santo
+ * Keomas Silva Santos
+ * Lucas Renato Aragão Silva
+ * 
  */
 public class ServerConnection {
 
@@ -35,7 +39,7 @@ public class ServerConnection {
         ServerConnection.FACTORY.setVirtualHost("admin");
         ServerConnection.FACTORY.setHost("35.161.72.204");
         ServerConnection.FACTORY.setPort(5672);
-      
+
         // Inicializa a Conexao e o Canal
         ServerConnection.CONN = ServerConnection.FACTORY.newConnection(ServerManager.getServersAddress());
         ServerConnection.CHANNEL = ServerConnection.CONN.createChannel();

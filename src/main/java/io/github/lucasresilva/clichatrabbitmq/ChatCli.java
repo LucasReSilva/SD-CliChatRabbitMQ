@@ -11,7 +11,12 @@ import java.util.concurrent.TimeoutException;
 
 /**
  *
- * @author lucas
+ * @authors
+ * Dimitri Carvalho Menezes
+ * Gilliard De Jesus Santo
+ * Keomas Silva Santos
+ * Lucas Renato Aragão Silva
+ * 
  */
 public class ChatCli {
 
@@ -56,7 +61,7 @@ public class ChatCli {
                     System.out.print(destinatario + ">> ");
                     break;
                 default:
-                    if (ANTERIOR.equals(">> ")) { 
+                    if (ANTERIOR.equals(">> ")) {
                         System.out.print(">> ");
                     }
 
@@ -109,12 +114,12 @@ public class ChatCli {
                             statusDestinatario = 'G';
                             destinatario = message.substring(2, message.length());
                             sc.queueDeclare(destinatario);
-                            ANTERIOR = destinatario + " (grupo)"; 
+                            ANTERIOR = destinatario + " (grupo)";
                         } else {
                             statusDestinatario = 'P';
                             destinatario = message.substring(1, message.length());
                             sc.queueDeclare(destinatario);
-                            ANTERIOR = destinatario; 
+                            ANTERIOR = destinatario;
                         }
 
                     } else if (statusDestinatario != 'I') {

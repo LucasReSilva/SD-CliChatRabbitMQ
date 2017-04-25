@@ -11,7 +11,12 @@ import java.util.ArrayList;
 
 /**
  *
- * @author lucas
+ * @authors
+ * Dimitri Carvalho Menezes
+ * Gilliard De Jesus Santo
+ * Keomas Silva Santos
+ * Lucas Renato Aragão Silva
+ * 
  */
 public class ServerManager {
 
